@@ -1,0 +1,49 @@
+{
+	"name": "java-dev",
+	"build": {
+		// "dockerfile": "Containerfile.debian",
+		"dockerfile": "Containerfile.sdk",
+		"args": {
+			"USER_UID": "1000",
+			"USERNAME": "vscode",
+			// "VARIANT": "slim"
+			"VARIANT": "focal"
+		}
+	},
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"code-eol.decorateBeforeEol": true,
+		"code-eol.highlightExtraWhitespace": true,
+		"code-eol.highlightNonDefault": true,
+		"files.associations": {
+			"*.json": "jsonc"
+		}
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"editorconfig.editorconfig",
+		"medo64.render-crlf",
+		"oderwat.indent-rainbow",
+		"vscjava.vscode-java-pack"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Replace when using a ptrace-based debugger like C++, Go, and Rust
+	// "runArgs": [ "--init", "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,Z",
+	"workspaceFolder": "/workspace",
+
+	"runArgs": ["--userns=keep-id", "--name=java-dev"],
+	"containerUser": "vscode"
+}
